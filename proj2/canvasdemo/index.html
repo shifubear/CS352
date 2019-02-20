@@ -1,0 +1,47 @@
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Dotty old Sierpinski</title>
+  <link rel="stylesheet" type="text/css" href="gasket.css" />
+</head>
+<body>
+  <div id="mainWindow">
+    <h3 class="titleBar">Randomized Viridian Forest</h3>
+
+    <div id="controls">
+      <div id="sliderdiv">
+        <p id="slidertitle">Pokemon ID</p>
+        <button id="randombutton" type="submit" >Random Encounter</button>
+
+      </div>
+      <p id="slidertitle" style="margin-top: .3in">Choose Pokeball</p>
+      <input id="slider1" type="range" min="1" max="6" value="1" />
+      <div id="ballimage">
+        <img id="ballimagesrc" src="../images/items/pokeball.png">
+      </div>
+      <button id="throwbutton" type="submit" >Throw!</button>
+    </div>
+    <div style="position: relative; margin-left:2in; margin-top: .16in">
+     
+      <canvas id="canvas1" width="645" height="400"
+        style="position: absolute; left: 0; top: 0; z-index: 0;">
+        <p>Your browser doesn't support the HTML5 canvas element.</p>
+      </canvas>
+      <canvas id="canvas2" width="645" height="400" 
+      style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+    </div>
+
+  </div>
+
+  <div id="messageWindow">
+    <h3 class="titleBar">Messages</h3>
+    <div id="messages"></div>
+  </div>
+
+  <!-- javascript, loaded at the end to make the page appear faster -->
+  <script type="text/javascript" src="https://cs.calvin.edu/curriculum/cs/352/files/js/jquery-1.4.4.min.js"></script>
+  <script type="text/javascript" src="https://cs.calvin.edu/curriculum/cs/352/files/js/sylvester.js"></script>
+  <script type="text/javascript" src="js/gasket.js"></script>
+</body>
+</html>
