@@ -28,31 +28,6 @@ var canvas2 = {
     canvas2.cx.clearRect(0,0,500,500);
   }
 }
-var canvas3 = {
-  init: function () {
-    canvas3.canvas = $('#canvas3')[0];
-    canvas3.cx = canvas3.canvas.getContext('2d');
-
-    canvas3.cx.fillStyle = 'rgba(195,149,130,1)';
-    canvas3.cx.beginPath();
-    canvas3.cx.arc(80, 320, 50, 0, 2*Math.PI, false);
-    canvas3.cx.fill();
-
-    canvas3.cx.fillStyle = 'rgba(255,255,255,1)'
-    canvas3.cx.fillRect(80, 310, 30, 20)
-
-    // Create eye gradient
-    var grd = canvas3.cx.createRadialGradient(107, 313, 1, 105, 315, 10);
-    grd.addColorStop(0, "white");
-    grd.addColorStop(1, "black");
-    
-    canvas3.cx.fillStyle = grd
-    canvas3.cx.beginPath();
-    canvas3.cx.arc(105, 315, 5, 0, 2*Math.PI, false);
-    canvas3.cx.fill();
-  },
-}
-
 var vertex = new Array();
 var ball = {
   x: 0,
@@ -76,7 +51,7 @@ var ball = {
   }
 }
 
-$(document).ready(function () { gasket.init(); canvas2.init(); canvas3.init()});
+$(document).ready(function () { gasket.init(); canvas2.init()});
 
 gasket.init = function () {  
   gasket.canvas  = $('#canvas1')[0];
@@ -103,11 +78,7 @@ var catchbit = true;
 
 
 canvas2.throw = function(ev) {
-  if(mypokemon.length >= 6) {
-    gasket.cx.font = "30px Arial";
-    gasket.cx.fillText("Party full!", 10, 160)
-    return;
-  }
+  if(my_pokemon_count == 6) {return;}
   ball.draw()
   ballup = true;
   paused = false;
@@ -141,6 +112,11 @@ function animate(time) {
       gasket.cx.clearRect(200,0,500,500);
       catchbit = false;
     }
+    var pokemon_image = new Image()
+    pokemon_image.onload = function() {
+      gasket.cx.drawImage(pokemon_image, 300, 200);
+    };
+    pokemon_image.src = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/' + pokemon_id + '.png'
     ball.draw()
     mypokemon.push(pokemon_id)
     for (var i = 0; i < mypokemon.length; i++) {
@@ -221,12 +197,10 @@ gasket.randomize = function(ev) {
   pokemon_id = getRandomInt(pokemon_count)
   var pokemon_image = new Image()
   pokemon_image.onload = function() {
-    gasket.cx.drawImage(pokemon_image, 275, 175, 150, 150);
+    gasket.cx.drawImage(pokemon_image, 250, 150);
   };
   pokemon_image.src = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/' + pokemon_id + '.png'
 
-  
-  //pokemon_image.src = 'http://img.yakkun.com/poke/sm/n' + pokemon_id + '.gif'
   canvas2.clearscreen()
   $('#messages').html("Set value to " + pokemon_id);
 }
