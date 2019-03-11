@@ -1,0 +1,59 @@
+html, body {
+    width:  50%;
+    height: 50%;
+    margin: 0;
+}  
+
+body {
+    background-color:rgb(250, 164, 164);
+}
+
+#mainWindow {
+    background-color:#ddd;
+    margin-top:0;
+    margin-left:0;
+}
+
+/* the drawing canvas */
+#canvas1 { 
+    position: absolute;
+    background-color:rgb(250, 164, 164);
+    margin: 0;
+    z-index: 0;
+}
+
+#scenecanvas {
+    position: absolute;
+    left:50pt;
+    top:50pt;
+    background-image: url("pixel_bg.png");
+    background-size: contain;
+    z-index: 1;
+}
+
+#linecanvas { 
+    position:absolute;
+    background-color: rgba(230, 44, 44, 0);
+    margin: 0;
+    z-index: 0;
+}
+
+
+/* box for debugging output */
+#messageWindow {
+    border: solid black 1px;
+    margin-left:20pt;
+    margin-top: 18pt;
+    width: 500pt;
+    height: 100pt;
+    background-color:#FF9;
+    overflow: auto;
+}
+
+#messages {
+    padding:4pt;
+    font-size:75%;
+    font-family:courier;
+    overflow: auto;
+}
+
