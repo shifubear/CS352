@@ -172,6 +172,12 @@ trackball.display = function() {
     f[i] = i;
   }
 
+  // Sort faces
+  faces.sort( function (a, b) {
+    return 
+  })
+  trackball.zsort(f);
+
   // display the faces
   var v1, v2, v3, faceNorm;
   for (i=0; i<faces.length; i++) {
@@ -190,11 +196,20 @@ trackball.display = function() {
       trackball.cx.lineTo(v[faces[f[i]].indices[j]].e(1), v[faces[f[i]].indices[j]].e(2));
     trackball.cx.closePath();
   
-    if ($('#strokeCheckbox').attr('checked')) 
+    if ($('#strokeCheckbox').attr('checked')) {
       trackball.cx.stroke();
-    if ($('#fillCheckbox').attr('checked')) 
+    }
+    if ($('#fillCheckbox').attr('checked')) {
       trackball.cx.fill();
+    }
   }
+}
+
+/*
+ * Z-sorts an array of faces f
+ */
+trackball.zsort = function(f) {
+
 }
 
 /*
