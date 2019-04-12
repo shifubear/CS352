@@ -7,6 +7,9 @@ var mesh, mouse = new THREE.Vector2();
 init();
 animate();
 function init() {
+
+    var petalcount = 8;
+
     container = document.getElementById( 'container' );
     camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
     camera.position.z = 500;
@@ -20,26 +23,38 @@ function init() {
     var light = new THREE.AmbientLight( 0x111111 );
     scene.add( light );
 
-    // Define geometry
-    var geometry = new THREE.BoxGeometry( 100, 100, 100 );
+    // Define stem
+    var stem = new THREE.BoxGeometry( 15, 100, 15 );
     var material = new THREE.MeshLambertMaterial( { color: 0xff0000, morphTargets: true } );
     // construct 8 blend shapes
     for ( var i = 0; i < 8; i ++ ) {
         var vertices = [];
-        for ( var v = 0; v < geometry.vertices.length; v ++ ) {
-            vertices.push( geometry.vertices[ v ].clone() );
+        for ( var v = 0; v < stem.vertices.length; v ++ ) {
+            vertices.push( stem.vertices[ v ].clone() );
             if ( v === i ) {
                 vertices[ vertices.length - 1 ].x *= 2;
                 vertices[ vertices.length - 1 ].y *= 2;
                 vertices[ vertices.length - 1 ].z *= 2;
             }
         }
-        geometry.morphTargets.push( { name: "target" + i, vertices: vertices } );
+        stem.morphTargets.push( { name: "target" + i, vertices: vertices } );
     }
-    geometry = new THREE.BufferGeometry().fromGeometry( geometry );
-    mesh = new THREE.Mesh( geometry, material );
+    stem = new THREE.BufferGeometry().fromGeometry( stem );
+    mesh = new THREE.Mesh( stem, material );
     scene.add( mesh );
     //
+
+    for ( var i = 1; i <= petalcount; i++ ) {
+        var petal = new THREE.BoxGeometry( 40, 6, 6 );
+        var pmaterial = new THREE.MeshLambertMaterial( { color: 0xff0000, morphTargets: true } );
+        petal = new THREE.BufferGeometry().fromGeometry( petal );
+        petalmesh = new THREE.Mesh( petal, material );
+        petalmesh.rotation.y = THREE.Math.degToRad( (i-1) * 360 / petalcount );    
+        petalmesh.position.set( 25 * Math.cos( i * (2 * Math.PI / petalcount) ), 50, 25 * Math.sin( i * (2 * Math.PI / petalcount) ));
+        console.log("x pos ", Math.cos( i * (2 * Math.PI / petalcount) ))
+        scene.add( petalmesh );
+    }
+
     var params = {
         influence1: 0,
         influence2: 0,
